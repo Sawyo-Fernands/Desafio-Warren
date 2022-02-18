@@ -1,0 +1,11 @@
+
+.Loading{
+    
+    display: flex;
+    
+    color: rgb(238, 95, 95);
+    margin-top: 1rem;
+}
+.Loading .text{
+    text-align: center;
+}
