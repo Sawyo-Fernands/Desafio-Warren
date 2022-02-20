@@ -8,6 +8,8 @@ import { api } from "../../services/api";
 import Logo from '../../assets/logo.png'
 import { Loading } from "../../components/Loading";
 import { Modal } from "../../components/Modal";
+import { useGetTransactionByID } from "../../hooks/usegetTransactionByID";
+import { useGetTransaction } from "../../hooks/useGetTransaction";
 
 
 interface ITransactions{
@@ -26,18 +28,13 @@ interface ITransactions{
 
 export const Home :React.FC=()=>{
 
-    //data
-    const [data,setData]=useState<ITransactions[]>([])
-  
-    //modal logic
+    
     const [id,setId]=useState('')
-    const [modal,setModal]=useState<ITransactions>()
-    const [showModal,setShowModal]=useState(false)
-    //modal logic
 
-    //Loading State
-    const [loading,setLoading]=useState(true)
-    //Loading state
+    //Hooks
+    const {modal,showModal,setShowModal}=useGetTransactionByID(id)
+    const {loading,data}=useGetTransaction()
+
 
     //filters logic
     const [filtro,setFilter]=useState('')
@@ -50,27 +47,6 @@ export const Home :React.FC=()=>{
     }
     //filters logic
 
-    useEffect(()=>{
-            api.get<ITransactions>(`/transactions/${id}`)
-            .then((res=>{
-                setModal(res.data)   
-                if(modal){
-                    setShowModal(true)
-                }
-            }))
-
-        },[id])
-
-
-    useEffect(()=>{
-
-        api.get<ITransactions[]>('/transactions')
-        .then((res=>{
-            setLoading(false)
-            setData(res.data)
-        }))
-
-    },[])
 
     return(
         <>
@@ -94,13 +70,13 @@ export const Home :React.FC=()=>{
                 <div className="flex-search">
                 <div className="search">
                     <AiOutlineSearch size={20} color="lightgray" />
-                    <input type="search"  id="" placeholder="....." value={filtro} onChange={(e)=>{
+                    <input type="search"  id="sch" placeholder="....." value={filtro} onChange={(e:ChangeEvent<HTMLInputElement>)=>{
                         setFilter(e.target.value)}
                         
                         }/>
                 </div>
                 <select id="values" value={filtroCategorias}
-                 onChange={(e)=>{setFilterCategory(e.target.value)}} className="options"
+                 onChange={(e:ChangeEvent<HTMLSelectElement> )=>{setFilterCategory(e.target.value)}} className="options"
                   >
                     <option value=""></option>
                     <option value="processed">Concluido</option>
