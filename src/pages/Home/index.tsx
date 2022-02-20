@@ -12,19 +12,6 @@ import { useGetTransactionByID } from "../../hooks/usegetTransactionByID";
 import { useGetTransaction } from "../../hooks/useGetTransaction";
 
 
-interface ITransactions{
-    
-    title:string,
-    description:string,
-    status:string,
-    amount:number,
-    id:string,
-    date:string,
-    to:string,
-    from:string
-
-}
-
 
 export const Home :React.FC=()=>{
 
