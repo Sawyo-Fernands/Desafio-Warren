@@ -75,33 +75,42 @@ export const Home :React.FC=()=>{
                
                 <div className="table">
 
-                    <table>
-                    <tr>
-                        <th>Titulo</th>
-                        <th>Descrição</th>
-                        <th>Status</th>
-                        <th>Valor</th>
-                     </tr>
 
-                     
-        {loading && <Loading children="Carregando..."/>}
+        {loading && <Loading  type={"spin"} color={"rgb(238, 95, 95)"}/> }
+        {!loading && (
+             <table>
+             <tr>
+                 <th>Titulo</th>
+                 <th>Descrição</th>
+                 <th>Status</th>
+                 <th>Valor</th>
+              </tr>
 
-                     {
-                    dataFilter.map((item)=>{
-                        return(     
-                            <tr onClick={()=>{
-                                setId(item.id)
-                            }}>
-                                <td key={item.id}>{item.title}</td>
-                                <td>{item.description}</td>
-                                <td>{item.status}</td>
-                                <td>{item.amount}</td>
-                            </tr>  
-                    )          
-                       }        
-                    )
-                }
-                    </table>     
+              
+
+              {
+             dataFilter.map((item)=>{
+                 return(     
+                     <tr onClick={()=>{
+                         setId(item.id)
+                     }}>
+
+
+                         <td key={item.id}>{item.title}</td>
+                         <td>{item.description}</td>
+                         <td>{item.status}</td>
+                         <td>{item.amount}</td>
+                     </tr>  
+             )          
+                }        
+             )
+         }
+             </table> 
+
+        )}
+
+
+                       
                 </div>
             </section>
         </main>

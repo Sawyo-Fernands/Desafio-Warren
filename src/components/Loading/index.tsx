@@ -1,17 +1,19 @@
-import React, { ReactNode } from "react";
+import React from "react";
+import ReactLoading from 'react-loading';
 
 import './Loading.css'
 
 interface ILoading{
-    children:ReactNode
+    type:string;
+    color:string;
 }
 
-export const Loading :React.FC<ILoading>=({children})=>{
+
+
+export const Loading :React.FC<ILoading>=({type,color})=>{
     return (
-        <div className="Loading">
-            <div className="text">
-              <h1>{children}</h1>  
-            </div>
+        <div className="load">
+        <ReactLoading type={type} color={color} height={"10%"} width={"10%"} />
         </div>
     )
 }
